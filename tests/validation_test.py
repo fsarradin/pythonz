@@ -50,3 +50,27 @@ class ValidationApplicativeTest(TestCase):
         result = Failure("error").ap(Success(lambda x: Success(x + 5)))
         self.assertEqual(Failure("error"), result)
 
+
+class MaybeInDataStructureTest(TestCase):
+    def test_Success_in_a_list(self):
+        self.assertIn(Success(5), [Success(5)])
+
+    def test_Failure_in_a_list(self):
+        self.assertIn(Failure("error"), [Failure("error")])
+
+    def test_Success_in_a_set(self):
+        numbers = {Success(5), Success(5)}
+        self.assertEqual(1, len(numbers))
+
+    def test_Failure_in_a_set(self):
+        numbers = {Failure("error"), Failure("error")}
+        self.assertEqual(1, len(numbers))
+
+    def test_Success_as_key_in_a_dict(self):
+        numbers = {Success(5): "five"}
+        self.assertEqual("five", numbers.get(Success(5)))
+
+    def test_Failure_as_key_in_a_dict(self):
+        numbers = {Failure("error"): "five"}
+        self.assertEqual("five", numbers.get(Failure("error")))
+
