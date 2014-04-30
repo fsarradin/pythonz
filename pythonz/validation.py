@@ -7,9 +7,6 @@ class Validation(object):
     def isFailure(self):
         return not self.isSuccess()
 
-    def get(self):
-        pass
-
     def swap(self):
         """append :: Validation e a -> Validation a e"""
         pass
@@ -45,9 +42,6 @@ class Success(Validation):
 
     def isSuccess(self):
         return True
-
-    def get(self):
-        return self.__value
 
     def swap(self):
         return Failure(self.__value)
@@ -89,9 +83,6 @@ class Failure(Validation):
 
     def isSuccess(self):
         return False
-
-    def get(self):
-        raise ValueError
 
     def swap(self):
         return Success(self.__value)
