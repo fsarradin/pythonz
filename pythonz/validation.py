@@ -1,11 +1,11 @@
 class Validation(object):
     """Validation e a"""
 
-    def isSuccess(self):
+    def is_success(self):
         pass
 
-    def isFailure(self):
-        return not self.isSuccess()
+    def is_failure(self):
+        return not self.is_success()
 
     def swap(self):
         """append :: Validation e a -> Validation a e"""
@@ -40,7 +40,7 @@ class Success(Validation):
     def __init__(self, value):
         self.__value = value
 
-    def isSuccess(self):
+    def is_success(self):
         return True
 
     def swap(self):
@@ -59,13 +59,13 @@ class Success(Validation):
         return f(z, self.__value)
 
     def ap(self, f):
-        if f.isSuccess():
+        if f.is_success():
             return f.__value(self.__value)
         else:
             return f
 
     def append(self, other):
-        if other.isSuccess():
+        if other.is_success():
             return Success(self.__value + other.__value)
         else:
             return other
@@ -90,7 +90,7 @@ class Failure(Validation):
     def __init__(self, value):
         self.__value = value
 
-    def isSuccess(self):
+    def is_success(self):
         return False
 
     def swap(self):
@@ -106,13 +106,13 @@ class Failure(Validation):
         return z
 
     def ap(self, f):
-        if f.isSuccess():
+        if f.is_success():
             return self
         else:
             return Failure(self.__value + f.__value)
 
     def append(self, other):
-        if other.isSuccess():
+        if other.is_success():
             return self
         else:
             return Failure(self.__value + other.__value)

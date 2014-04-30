@@ -5,16 +5,16 @@ from validation import Success, Failure
 
 class ValidationTest(TestCase):
     def test_Success_should_be_success(self):
-        self.assertTrue(Success(10).isSuccess())
+        self.assertTrue(Success(10).is_success())
 
     def test_Failure_should_not_be_success(self):
-        self.assertFalse(Failure("error").isSuccess())
+        self.assertFalse(Failure("error").is_success())
 
     def test_Success_should_not_be_failure(self):
-        self.assertFalse(Success(10).isFailure())
+        self.assertFalse(Success(10).is_failure())
 
     def test_Failure_should_be_failure(self):
-        self.assertTrue(Failure("error").isFailure())
+        self.assertTrue(Failure("error").is_failure())
 
     def test_swap_should_convert_success_into_failure(self):
         self.assertEqual(Failure(10), Success(10).swap())
