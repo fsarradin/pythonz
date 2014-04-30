@@ -73,6 +73,9 @@ class Success(Validation):
     def __add__(self, other):
         return self.append(other)
 
+    def __repr__(self):
+        return "Success(%s)" % repr(self.__value)
+
     def __eq__(self, other):
         return other.__class__ == self.__class__ and other.__value == self.__value
 
@@ -110,6 +113,9 @@ class Failure(Validation):
 
     def __add__(self, other):
         return self.append(other)
+
+    def __repr__(self):
+        return "Success(%s)" % repr(self.__value)
 
     def __eq__(self, other):
         return other.__class__ == self.__class__ and other.__value == self.__value
