@@ -82,6 +82,9 @@ class Success(Validation):
     def __eq__(self, other):
         return other.__class__ == self.__class__ and other.__value == self.__value
 
+    def __iter__(self):
+        yield self.__value
+
 
 class Failure(Validation):
     def __init__(self, value):
@@ -125,3 +128,6 @@ class Failure(Validation):
 
     def __eq__(self, other):
         return other.__class__ == self.__class__ and other.__value == self.__value
+
+    def __iter__(self):
+        yield from ()

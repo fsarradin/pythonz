@@ -22,6 +22,20 @@ class ValidationTest(TestCase):
     def test_swap_should_convert_failure_into_success(self):
         self.assertEqual(Failure(10), Success(10).swap())
 
+    def test_Success_iter(self):
+        has_been_changed = False
+        for value in Success(10):
+            has_been_changed = True
+
+        self.assertTrue(has_been_changed)
+
+    def test_Failure_iter(self):
+        has_been_changed = False
+        for value in Failure("error"):
+            has_been_changed = True
+
+        self.assertFalse(has_been_changed)
+
 
 class ValidationMapTest(TestCase):
     def test_map_of_Success_should_be_another_Success(self):
