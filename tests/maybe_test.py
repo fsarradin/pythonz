@@ -75,3 +75,28 @@ class MaybeFoldTest(TestCase):
     def test_fold_of_Nothing_shold_be_initial_value(self):
         result = Nothing.fold(5, lambda x, y: x + y)
         self.assertEqual(5, result)
+
+
+class MaybeInDataStructureTest(TestCase):
+    def test_Just_in_a_list(self):
+        self.assertIn(Just(5), [Just(5)])
+
+    def test_Nothing_in_a_list(self):
+        self.assertIn(Nothing, [Nothing])
+
+    def test_Just_in_a_set(self):
+        numbers = {Just(5), Just(5)}
+        self.assertEqual(1, len(numbers))
+
+    def test_Nothing_in_a_set(self):
+        numbers = {Nothing, Nothing}
+        self.assertEqual(1, len(numbers))
+
+    def test_Just_as_key_in_a_dict(self):
+        numbers = {Just(5): "five"}
+        self.assertEqual("five", numbers.get(Just(5)))
+
+    def test_Nothing_as_key_in_a_dict(self):
+        numbers = {Nothing: "five"}
+        self.assertEqual("five", numbers.get(Nothing))
+

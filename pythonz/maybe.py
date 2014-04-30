@@ -60,6 +60,9 @@ class Just(Maybe):
     def fold(self, z, f):
         return f(z, self.__value)
 
+    def __hash__(self):
+        return hash(self.__class__) ^ hash(self.__value)
+
     def __repr__(self):
         return "Just(%s)" % self.__value
 
@@ -88,6 +91,9 @@ class _Nothing(Maybe):
 
     def fold(self, z, f):
         return z
+
+    def __hash__(self):
+        return hash(self.__class__)
 
     def __repr__(self):
         return "Nothing"
