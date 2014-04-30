@@ -32,6 +32,14 @@ class ValidationMapTest(TestCase):
         result = Failure("error").map(lambda x: x + 5)
         self.assertEqual(Failure("error"), result)
 
+    def test_flatmap_of_Success_should_be_another_Success(self):
+        result = Success(10).flatmap(lambda x: Success(x + 5))
+        self.assertEqual(Success(15), result)
+
+    def test_flatmap_of_Failure_should_be_this_Failure(self):
+        result = Failure("error").flatmap(lambda x: Success(x + 5))
+        self.assertEqual(Failure("error"), result)
+
 
 class ValidationApplicativeTest(TestCase):
     def test_append_two_Success_then_should_produce_another_Success(self):
