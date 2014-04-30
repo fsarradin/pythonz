@@ -23,18 +23,18 @@ class MaybeTest(TestCase):
         self.assertEqual(Nothing, Nothing)
 
     def test_iter_on_Just(self):
-        result = 0
+        has_been_changed = False
         for value in Just(10):
-            result = value
+            has_been_changed = True
 
-        self.assertEqual(10, result)
+        self.assertTrue(has_been_changed)
 
     def test_iter_on_Nothing(self):
-        result = 0
+        has_been_changed = False
         for value in Nothing:
-            result = value
+            has_been_changed = True
 
-        self.assertEqual(0, result)
+        self.assertFalse(has_been_changed)
 
 
 class MaybeDefinedTest(TestCase):
