@@ -42,6 +42,11 @@ class ValidationApplicativeTest(TestCase):
         result = Success([10]) + Failure(["Nope"])
         self.assertEqual(Failure(["Nope"]), result)
 
-    def test_ap(self):
+    def test_ap_on_Success_with_function_returning_Success_is_another_Success(self):
         result = Success(10).ap(Success(lambda x: Success(x + 5)))
         self.assertEqual(Success(15), result)
+
+    def test_ap_on_Failure_is_Failure(self):
+        result = Failure("error").ap(Success(lambda x: Success(x + 5)))
+        self.assertEqual(Failure("error"), result)
+

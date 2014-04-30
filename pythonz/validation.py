@@ -60,7 +60,7 @@ class Success(Validation):
 
     def ap(self, f):
         if f.isSuccess():
-            return f.get()(self.__value)
+            return f.__value(self.__value)
         else:
             return f
 
